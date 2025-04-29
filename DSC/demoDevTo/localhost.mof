@@ -1,0 +1,41 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=olivi
+@GenerationDate=04/28/2025 22:50:22
+@GenerationHost=MSI
+*/
+
+instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
+{
+ResourceID = "[Registry]Registydemo";
+ ValueName = "TestValue";
+ Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\ExampleKey1";
+ ValueType = "String";
+ ValueData = {
+    "TestData"
+};
+ ModuleName = "PsDesiredStateConfiguration";
+ SourceInfo = "C:\\work\\DSC-Azure-machine-config-demo\\DSC\\demo.dsc.ps1::7::5::Registry";
+ Ensure = "Present";
+
+ModuleVersion = "1.0";
+ ConfigurationName = "demoDevTo";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="olivi";
+
+                        GenerationDate="04/28/2025 22:50:22";
+
+                        GenerationHost="MSI";
+
+                        Name="demoDevTo";
+
+                    };
