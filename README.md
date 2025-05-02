@@ -60,6 +60,11 @@ set-azStorageBlob -container "packages" -file ".\demodevto.zip" -blob "demodevto
 
 ## VM requierement 
 
+The Guest Configuration package can be only apply to a VM if it had a managed identity and the Microsoft.Guestconfiguration extension.
+The managed identity and the extension can be enabled via Azure Policy
 
+## Delivering the package
 
-## Policy to deliver the package
+### Bicep
+
+### Azure Policy
