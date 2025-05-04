@@ -63,7 +63,22 @@ set-azStorageBlob -container "packages" -file ".\demodevto.zip" -blob "demodevto
 The Guest Configuration package can be only apply to a VM if it had a managed identity and the Microsoft.Guestconfiguration extension.
 The managed identity and the extension can be enabled via Azure Policy
 
+The 2 policies install the extension and configure the VM to use a system 
+
 ## Delivering the package
+
+There are two way to deliver the package to a VM. You can deploy on each VM with IaC like Bicep, ARM Template or Terraform, or at scale by using Azure Policy.
+
+For both we need to have the SAS URI for the package 
+
+```powershell
+$today = Get-Date
+$expirationDate = $today.AddYears(1)
+
+
+
+New-AzStorageBlobSASToken -Context $ctx -Container <container> -Blob <blob> -Permission racwd -ExpiryTime $expirationDate -FullUri
+```
 
 ### Bicep
 
