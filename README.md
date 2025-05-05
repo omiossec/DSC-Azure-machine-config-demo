@@ -77,9 +77,50 @@ $expirationDate = $today.AddYears(1)
 
 
 
-New-AzStorageBlobSASToken -Context $ctx -Container <container> -Blob <blob> -Permission racwd -ExpiryTime $expirationDate -FullUri
+$strPackageURI = New-AzStorageBlobSASToken -Context $storageAccount.context -Container "packages" -Blob "demodevto.zip" -Permission racwd -ExpiryTime $expirationDate -FullUri
 ```
 
 ### Bicep
 
+
+```bicep
+resource myVM 'Microsoft.Compute/virtualMachines@2021-03-01' existing = {
+  name: '<vm_name>'
+}
+
+resource myConfiguration 'Microsoft.GuestConfiguration/guestConfigurationAssignments@2020-06-25' = {
+  name: '<configuration_name>'
+  scope: myVM
+  location: resourceGroup().location
+  properties: {
+    guestConfiguration: {
+      name: '<configuration_name>'
+      contentUri: '<Url_to_Package.zip>'
+      contentHash: '<SHA256_hash_of_package.zip>'
+      version: '1.*'
+      assignmentType: 'ApplyAndMonitor'
+    }
+  }
+}
+```
+
+
 ### Azure Policy
+
+```powershell
+
+$guid = new-guid
+
+
+$PolicyConfig      = @{
+  PolicyId      = $guid.Guid
+  ContentUri    = $contentUri
+  DisplayName   = 'My audit policy'
+  Description   = 'My audit policy'
+  Path          = './policies/auditIfNotExists.json'
+  Platform      = 'Windows'
+  PolicyVersion = 1.0.0
+}
+
+New-GuestConfigurationPolicy @PolicyConfig
+```
