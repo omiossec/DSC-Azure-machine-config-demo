@@ -2,7 +2,8 @@ configuration demoDevTo {
 
 
 
-    Import-DscResource -ModuleName 'PSDesiredStateConfiguration'
+    Import-DscResource -ModuleName 'PSDSCResources'
+    
 
     Registry Registydemo
     {

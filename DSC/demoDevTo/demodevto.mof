@@ -1,7 +1,7 @@
 /*
 @TargetNode='localhost'
 @GeneratedBy=olivi
-@GenerationDate=04/28/2025 22:50:22
+@GenerationDate=05/05/2025 22:37:21
 @GenerationHost=MSI
 */
 
@@ -11,14 +11,13 @@ ResourceID = "[Registry]Registydemo";
  ValueName = "TestValue";
  Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\ExampleKey1";
  ValueType = "String";
+ ModuleVersion = "2.12.0.0";
  ValueData = {
     "TestData"
 };
- ModuleName = "PsDesiredStateConfiguration";
- SourceInfo = "C:\\work\\DSC-Azure-machine-config-demo\\DSC\\demo.dsc.ps1::7::5::Registry";
- Ensure = "Present";
-
-ModuleVersion = "1.0";
+ ModuleName = "PSDscResources";
+ SourceInfo = "C:\\work\\DSC-Azure-machine-config-demo\\DSC\\demo.dsc.ps1::8::5::Registry";
+ Ensure = "Present";
  ConfigurationName = "demoDevTo";
 };
 instance of OMI_ConfigurationDocument
@@ -32,7 +31,7 @@ instance of OMI_ConfigurationDocument
 
                         Author="olivi";
 
-                        GenerationDate="04/28/2025 22:50:22";
+                        GenerationDate="05/05/2025 22:37:21";
 
                         GenerationHost="MSI";
 
