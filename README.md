@@ -82,7 +82,7 @@ $expirationDate = $today.AddYears(1)
 
 
 
-$strPackageURI = New-AzStorageBlobSASToken -Context $storageAccount.context -Container "packages" -Blob "demodevto.zip" -Permission racwd -ExpiryTime $expirationDate -FullUri
+$strPackageURI = New-AzStorageBlobSASToken -Context $storageAccount.context -Container "packages" -Blob "demodevto.zip" -Permission r -ExpiryTime $expirationDate -FullUri
 ```
 
 ### Bicep
@@ -95,38 +95,64 @@ $packageHash = Get-FileHash -Path ./demodevto.zip -Algorithm SHA256
 
 We also need to get the SAS uri of the package in the storage account 
 
-
-```powershell
-$expiryTime = (Get-Date).AddYears(1) 
-$permissions = "r"
-
-$sasToken = New-AzStorageBlobSASToken -Container "packages" -Blob "demodevto.zip" -Context $storageAccount.context -ExpiryTime $expiryTime -Permission $permissions -FullUri
-```
-
+The bicep template to deploy the configuration 
 
 ```bicep
-resource myVM 'Microsoft.Compute/virtualMachines@2021-03-01' existing = {
-  name: '<vm_name>'
+@description('Name of the Configuration')
+param configurationName string
+
+@description('type of assignment')
+@allowed([
+  'ApplyAndAutoCorrect'
+  'ApplyAndMonitor'
+  'Audit'
+  'DeployAndAutoCorrect'
+])
+param assignmentType string = 'ApplyAndAutoCorrect'
+
+@description('The SAS URI of the package')
+param packageSasUri string
+
+@description('package SHA256 hash')
+param packageHash string
+
+
+@description('Target VM name')
+param vmName string
+
+
+resource targetVM 'Microsoft.Compute/virtualMachines@2021-03-01' existing = {
+  name: vmName
 }
 
 resource myConfiguration 'Microsoft.GuestConfiguration/guestConfigurationAssignments@2020-06-25' = {
-  name: '<configuration_name>'
-  scope: myVM
+  name: configurationName
+  scope: targetVM
   location: resourceGroup().location
   properties: {
     guestConfiguration: {
-      name: '<configuration_name>'
-      contentUri: '<Url_to_Package.zip>'
-      contentHash: '<SHA256_hash_of_package.zip>'
+      name: configurationName
+      contentUri: packageSasUri
+      contentHash: packageHash
       version: '1.*'
-      assignmentType: 'ApplyAndMonitor'
+      assignmentType: assignmentType
     }
   }
 }
+
 ```
 
+to deploy the configuration 
+
+```powershell
+New-AzResourceGroupDeployment -Name ParamDeployment -ResourceGroupName demoBicep -TemplateFile ./deploy/bicep/main.bicep -configurationName "demodevto" -packageSasUri $strPackageURI -packageHash $packageHash.Hash -vmName "vm01"
+
+```
 
 ### Azure Policy
+
+To deploy at scale with Azure Policy there are several steps, first 
+
 
 ```powershell
 
