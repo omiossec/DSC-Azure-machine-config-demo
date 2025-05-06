@@ -91,7 +91,16 @@ The first to do is to get the SHA256 of the package file created by the gest con
 
 ```powershell
 $packageHash = Get-FileHash -Path ./demodevto.zip -Algorithm SHA256
+```
 
+We also need to get the SAS uri of the package in the storage account 
+
+
+```powershell
+$expiryTime = (Get-Date).AddYears(1) 
+$permissions = "r"
+
+$sasToken = New-AzStorageBlobSASToken -Container "packages" -Blob "demodevto.zip" -Context $storageAccount.context -ExpiryTime $expiryTime -Permission $permissions -FullUri
 ```
 
 
