@@ -34,7 +34,7 @@ resource myConfiguration 'Microsoft.GuestConfiguration/guestConfigurationAssignm
       name: configurationName
       contentUri: packageSasUri
       contentHash: packageHash
-      version: '1.*'
+      version: '1.0.0'
       assignmentType: assignmentType
     }
   }

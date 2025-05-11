@@ -145,7 +145,7 @@ resource myConfiguration 'Microsoft.GuestConfiguration/guestConfigurationAssignm
 to deploy the configuration 
 
 ```powershell
-New-AzResourceGroupDeployment -Name ParamDeployment -ResourceGroupName demoBicep -TemplateFile ./deploy/bicep/main.bicep -configurationName "demodevto" -packageSasUri $strPackageURI -packageHash $packageHash.Hash -vmName "vm01"
+New-AzResourceGroupDeployment -Name ParamDeployment -ResourceGroupName demo-dsc -TemplateFile ./deploy/bicep/main.bicep -configurationName "demodevto" -packageSasUri $strPackageURI -packageHash $packageHash.Hash -vmName "vm01"
 
 ```
 
