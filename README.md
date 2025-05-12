@@ -63,12 +63,12 @@ $storageAccount = get-azStorageAccount -name "demodscomc001" -resourcegroup "dem
 set-azStorageBlobContent -container "packages" -file ".\demodevto.zip" -blob "demodevto.zip" -context $storageAccount.context -force 
 ```
 
-## VM requierement 
+## VM requierement
 
 The Guest Configuration package can be only apply to a VM if it had a managed identity and the Microsoft.Guestconfiguration extension.
 The managed identity and the extension can be enabled via Azure Policy
 
-The 2 policies install the extension and configure the VM to use a system 
+The 2 policies install the extension and configure the VM to use a system
 
 ## Delivering the package
 
@@ -151,23 +151,18 @@ New-AzResourceGroupDeployment -Name ParamDeployment -ResourceGroupName demo-dsc 
 
 ### Azure Policy
 
-To deploy at scale with Azure Policy there are several steps, first 
+To deploy a configuration at sscale, you will have to use Azure Policy. To help you create the policy you will have to use the New-GuestConfigurationPolicy
 
 
 ```powershell
 
 $guid = new-guid
 
-
-$PolicyConfig      = @{
-  PolicyId      = $guid.Guid
-  ContentUri    = $contentUri
-  DisplayName   = 'My audit policy'
-  Description   = 'My audit policy'
-  Path          = './policies/auditIfNotExists.json'
-  Platform      = 'Windows'
-  PolicyVersion = 1.0.0
-}
-
-New-GuestConfigurationPolicy @PolicyConfig
+New-GuestConfigurationPolicy -policyId $guid.Guid -ContentUri $strPackageURI -DisplayName "demoDevTo" -Description "Demo Policy for Dev.to" -path "./deploy/policy/" -platform "windows" -policyVersion "1.0.0" -Mode "ApplyAndAutoCorrect"
 ```
+
+You need to have a Guid for the policy name, it takke a the blob URI, a display Name and a description, the path to the folder to store the policy, the plateform, the version of the configuration and the mode (Audit or autocorrect).
+
+The command generate a deploy if not exist policy, you can edit the policy but you need to ensure that  the guestConfiguration metadata match the deployment.
+
+
