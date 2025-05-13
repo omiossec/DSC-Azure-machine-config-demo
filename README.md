@@ -161,7 +161,7 @@ $guid = new-guid
 New-GuestConfigurationPolicy -policyId $guid.Guid -ContentUri $strPackageURI -DisplayName "demoDevTo" -Description "Demo Policy for Dev.to" -path "./deploy/policy/" -platform "windows" -policyVersion "1.0.0" -Mode "ApplyAndAutoCorrect"
 ```
 
-You need to have a Guid for the policy name, it takke a the blob URI, a display Name and a description, the path to the folder to store the policy, the plateform, the version of the configuration and the mode (Audit or autocorrect).
+You need to have a Guid for the policy name, it takke a the blob URI, a display Name and a description, the path to the folder to store the policy, the plateform, the version of the configuration and the mode (ApplyAndMonitor, ApplyAndAutoCorrect, or Audit).
 
 You don't have to provide the SHA256 hash, the command will do it for you. 
 
@@ -209,6 +209,8 @@ The command generate a deploy if not exist policy, you can edit the policy but y
                                             }
 ```
 
-Also pay attention to the "version" property in the Guest configuration, the command set the value to "True" while it should be "1.0.0". 
+Also pay attention to the "version" property in the Guest configuration, the command set the value to "True" while it should be "1.0.0".
 
 The deploy if not exist deployment section target Azure Virtual Machines, Azure ARC machines and Azure Scale Set. You can remove this deployment if not needed.
+
+The policy can be added in Azure and assigned to a VM, the deployment can be made when a new VM is created or when a remediation task is created. 
