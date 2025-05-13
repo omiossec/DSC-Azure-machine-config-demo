@@ -87,7 +87,7 @@ $strPackageURI = New-AzStorageBlobSASToken -Context $storageAccount.context -Con
 
 ### Bicep
 
-The first to do is to get the SHA256 of the package file created by the gest configuration command
+The first to do is to get the SHA256 hash of the package file created by the gest configuration command
 
 ```powershell
 $packageHash = Get-FileHash -Path ./demodevto.zip -Algorithm SHA256
@@ -163,6 +163,52 @@ New-GuestConfigurationPolicy -policyId $guid.Guid -ContentUri $strPackageURI -Di
 
 You need to have a Guid for the policy name, it takke a the blob URI, a display Name and a description, the path to the folder to store the policy, the plateform, the version of the configuration and the mode (Audit or autocorrect).
 
+You don't have to provide the SHA256 hash, the command will do it for you. 
+
 The command generate a deploy if not exist policy, you can edit the policy but you need to ensure that  the guestConfiguration metadata match the deployment.
 
+```json
+        "metadata": {
+            "category": "Guest Configuration",
+            "version": "1.0.0",
+            "requiredProviders": [
+                "Microsoft.GuestConfiguration"
+            ],
+            "guestConfiguration": {
+                "name": "demodevto",
+                "version": "True",
+                "contentType": "Custom",
+                "contentUri": "https://demodscomc001.blob.core.windows.net/packages/demodevto.zip?sv=2023-08-03&se=2026-05-06T05%3A03%3A10Z&sr=b&sp=r&sig=6wKnMoLQ2hR4OD5cgUXBdHWOjBBDz95%2BfAT8BHOMk60%3D",
+                "contentHash": "8A7AEFF27A8BA4F9806E757AA9927A2A41C45F5C6ACB25024A55BA37ED17908D"
+            }
+        }        "metadata": {
+            "category": "Guest Configuration",
+            "version": "1.0.0",
+            "requiredProviders": [
+                "Microsoft.GuestConfiguration"
+            ],
+            "guestConfiguration": {
+                "name": "demodevto",
+                "version": "True",
+                "contentType": "Custom",
+                "contentUri": "https://demodscomc001.blob.core.windows.net/packages/demodevto.zip?sv=2023-08-03&se=2026-05-06T05%3A03%3A10Z&sr=b&sp=r&sig=6wKnMoLQ2hR4OD5cgUXBdHWOjBBDz95%2BfAT8BHOMk60%3D",
+                "contentHash": "8A7AEFF27A8BA4F9806E757AA9927A2A41C45F5C6ACB25024A55BA37ED17908D"
+            }
+        }
+```
 
+
+```json
+                                            "guestConfiguration": {
+                                                "name": "demodevto",
+                                                "version": "True",
+                                                "contentType": "Custom",
+                                                "contentUri": "https://demodscomc001.blob.core.windows.net/packages/demodevto.zip?sv=2023-08-03&se=2026-05-06T05%3A03%3A10Z&sr=b&sp=r&sig=6wKnMoLQ2hR4OD5cgUXBdHWOjBBDz95%2BfAT8BHOMk60%3D",
+                                                "contentHash": "8A7AEFF27A8BA4F9806E757AA9927A2A41C45F5C6ACB25024A55BA37ED17908D",
+                                                "assignmentType": "ApplyAndAutoCorrect"
+                                            }
+```
+
+Also pay attention to the "version" property in the Guest configuration, the command set the value to "True" while it should be "1.0.0". 
+
+The deploy if not exist deployment section target Azure Virtual Machines, Azure ARC machines and Azure Scale Set. You can remove this deployment if not needed.

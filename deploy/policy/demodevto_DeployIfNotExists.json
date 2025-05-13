@@ -313,7 +313,7 @@
                                         "properties": {
                                             "guestConfiguration": {
                                                 "name": "demodevto",
-                                                "version": "True",
+                                                "version": "1.0.0",
                                                 "contentType": "Custom",
                                                 "contentUri": "https://demodscomc001.blob.core.windows.net/packages/demodevto.zip?sv=2023-08-03&se=2026-05-06T05%3A03%3A10Z&sr=b&sp=r&sig=6wKnMoLQ2hR4OD5cgUXBdHWOjBBDz95%2BfAT8BHOMk60%3D",
                                                 "contentHash": "8A7AEFF27A8BA4F9806E757AA9927A2A41C45F5C6ACB25024A55BA37ED17908D",
@@ -330,7 +330,7 @@
                                         "properties": {
                                             "guestConfiguration": {
                                                 "name": "demodevto",
-                                                "version": "True",
+                                                "version": "1.0.0",
                                                 "contentType": "Custom",
                                                 "contentUri": "https://demodscomc001.blob.core.windows.net/packages/demodevto.zip?sv=2023-08-03&se=2026-05-06T05%3A03%3A10Z&sr=b&sp=r&sig=6wKnMoLQ2hR4OD5cgUXBdHWOjBBDz95%2BfAT8BHOMk60%3D",
                                                 "contentHash": "8A7AEFF27A8BA4F9806E757AA9927A2A41C45F5C6ACB25024A55BA37ED17908D",
@@ -347,7 +347,7 @@
                                         "properties": {
                                             "guestConfiguration": {
                                                 "name": "demodevto",
-                                                "version": "True",
+                                                "version": "1.0.0",
                                                 "contentType": "Custom",
                                                 "contentUri": "https://demodscomc001.blob.core.windows.net/packages/demodevto.zip?sv=2023-08-03&se=2026-05-06T05%3A03%3A10Z&sr=b&sp=r&sig=6wKnMoLQ2hR4OD5cgUXBdHWOjBBDz95%2BfAT8BHOMk60%3D",
                                                 "contentHash": "8A7AEFF27A8BA4F9806E757AA9927A2A41C45F5C6ACB25024A55BA37ED17908D",
