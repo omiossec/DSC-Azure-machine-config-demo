@@ -1,10 +1,7 @@
 configuration demoDevTo {
 
-
-
     Import-DscResource -ModuleName 'PSDSCResources'
     
-
     Registry Registydemo
     {
         Ensure      = "Present"  

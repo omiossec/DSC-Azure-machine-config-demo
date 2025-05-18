@@ -2,7 +2,7 @@
     "properties": {
 
       "mode": "Indexed",
-      "description": "This policy deploys the Windows Guest Configuration extension to Windows virtual machines hosted in Azure that are supported by Guest Configuration. The Windows Guest Configuration extension is a prerequisite for all Windows Guest Configuration assignments and must be deployed to machines before using any Windows Guest Configuration policy definition. For more information on Guest Configuration, visit https://aka.ms/gcpol.",
+      "description": "This policy deploys the Windows Guest Configuration extension to Azure Windows VMs",
       "metadata": {
         "category": "Guest Configuration",
         "version": "1.2.0"
@@ -22,20 +22,7 @@
                 {
                   "field": "Microsoft.Compute/imageSKU",
                   "notLike": "2008*"
-                },
-  
-              {
-                "anyOf": [
-                  {
-                    "field": "identity.type",
-                    "exists": "false"
-                  },
-                  {
-                    "field": "identity.type",
-                    "equals": "None"
-                  }
-                ]
-              }
+                }
             ]
           } 
         
