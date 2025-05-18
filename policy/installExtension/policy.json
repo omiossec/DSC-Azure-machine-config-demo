@@ -4,10 +4,8 @@
       "mode": "Indexed",
       "description": "This policy deploys the Windows Guest Configuration extension to Azure Windows VMs",
       "metadata": {
-        "category": "Guest Configuration",
-        "version": "1.2.0"
+        "category": "Guest Configuration"
       },
-      "version": "1.2.0",
       "policyRule": {
         "if":  {
             "allOf": [

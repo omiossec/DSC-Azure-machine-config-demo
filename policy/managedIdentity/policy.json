@@ -4,10 +4,8 @@
       "mode": "Indexed",
       "description": "This policy adds a system-assigned managed identity to Azure Windows VMs",
       "metadata": {
-        "category": "Guest Configuration",
-        "version": "4.1.0"
+        "category": "Guest Configuration"
       },
-      "version": "4.1.0",
       "policyRule": {
         "if": {
           "allOf": [
